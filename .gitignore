@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# AWS
+credentials.json

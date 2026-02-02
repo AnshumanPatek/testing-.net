@@ -74,6 +74,106 @@ public class ContentService : IContentService
         };
     }
 
+    public async Task<HeroSectionDto> GetHeroSectionAsync()
+    {
+        var hero = await _context.HeroSection.Include(h => h.Background).FirstOrDefaultAsync(h => h.Id == 1);
+        
+        return new HeroSectionDto
+        {
+            Headline = hero?.Headline,
+            Tagline = hero?.Tagline,
+            BackgroundType = hero?.BackgroundType,
+            BackgroundUrl = hero?.Background?.S3Url,
+            IsDraft = hero?.IsDraft ?? true
+        };
+    }
+
+    public async Task<AboutSectionDto> GetAboutSectionAsync()
+    {
+        var about = await _context.AboutSection.Include(a => a.Image).FirstOrDefaultAsync(a => a.Id == 1);
+        
+        return new AboutSectionDto
+        {
+            Title = about?.Title,
+            Content = about?.Content,
+            ImageUrl = about?.Image?.S3Url,
+            IsDraft = about?.IsDraft ?? true
+        };
+    }
+
+    public async Task<YouTubeSectionDto> GetYouTubeSectionAsync()
+    {
+        var youtube = await _context.YouTubeSection.FirstOrDefaultAsync(y => y.Id == 1);
+        
+        return new YouTubeSectionDto
+        {
+            VideoUrl = youtube?.VideoUrl,
+            Title = youtube?.Title,
+            IsDraft = youtube?.IsDraft ?? true
+        };
+    }
+
+    public async Task UpdateNavbarAsync(NavbarDto dto)
+    {
+        var navbar = await _context.Navbar.FirstOrDefaultAsync(n => n.Id == 1);
+        
+        if (navbar == null)
+        {
+            navbar = new Models.Navbar { Id = 1 };
+            _context.Navbar.Add(navbar);
+        }
+
+        if (!string.IsNullOrEmpty(dto.LogoId) && Guid.TryParse(dto.LogoId, out var logoId))
+        {
+            navbar.LogoId = logoId;
+        }
+        navbar.CTAText = dto.CTAText ?? "Schedule a call";
+        navbar.CTAUrl = dto.CTAUrl;
+        navbar.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateYouTubeSectionAsync(YouTubeSectionDto dto)
+    {
+        var youtube = await _context.YouTubeSection.FirstOrDefaultAsync(y => y.Id == 1);
+        
+        if (youtube == null)
+        {
+            youtube = new Models.YouTubeSection { Id = 1 };
+            _context.YouTubeSection.Add(youtube);
+        }
+
+        youtube.VideoUrl = dto.VideoUrl;
+        youtube.Title = dto.Title;
+        youtube.IsDraft = dto.IsDraft;
+        youtube.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateFooterAsync(FooterDto dto)
+    {
+        var footer = await _context.Footer.FirstOrDefaultAsync(f => f.Id == 1);
+        
+        if (footer == null)
+        {
+            footer = new Models.Footer { Id = 1 };
+            _context.Footer.Add(footer);
+        }
+
+        footer.Email = dto.Email;
+        footer.Phone = dto.Phone;
+        footer.Address = dto.Address;
+        footer.Copyright = dto.Copyright;
+        footer.Instagram = dto.Instagram;
+        footer.LinkedIn = dto.LinkedIn;
+        footer.Behance = dto.Behance;
+        footer.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+    }
+
     public async Task UpdateHeroSectionAsync(HeroSectionDto dto)
     {
         var hero = await _context.HeroSection.FirstOrDefaultAsync(h => h.Id == 1);
@@ -87,7 +187,7 @@ public class ContentService : IContentService
         hero.Headline = dto.Headline;
         hero.Tagline = dto.Tagline;
         hero.BackgroundType = dto.BackgroundType ?? "Image";
-        hero.IsDraft = true;
+        hero.IsDraft = dto.IsDraft;
         hero.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
@@ -105,7 +205,7 @@ public class ContentService : IContentService
 
         about.Title = dto.Title;
         about.Content = dto.Content;
-        about.IsDraft = true;
+        about.IsDraft = dto.IsDraft;
         about.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

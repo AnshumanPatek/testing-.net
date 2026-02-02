@@ -40,6 +40,14 @@ public class ContentController : ControllerBase
 
     // Admin endpoints
     [Authorize(Roles = "Admin,Editor")]
+    [HttpGet("hero")]
+    public async Task<IActionResult> GetHero()
+    {
+        var hero = await _contentService.GetHeroSectionAsync();
+        return Ok(hero);
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
     [HttpPut("hero")]
     public async Task<IActionResult> UpdateHero([FromBody] HeroSectionDto dto)
     {
@@ -48,10 +56,50 @@ public class ContentController : ControllerBase
     }
 
     [Authorize(Roles = "Admin,Editor")]
+    [HttpGet("about")]
+    public async Task<IActionResult> GetAbout()
+    {
+        var about = await _contentService.GetAboutSectionAsync();
+        return Ok(about);
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
     [HttpPut("about")]
     public async Task<IActionResult> UpdateAbout([FromBody] AboutSectionDto dto)
     {
         await _contentService.UpdateAboutSectionAsync(dto);
+        return Ok();
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
+    [HttpGet("youtube")]
+    public async Task<IActionResult> GetYouTube()
+    {
+        var youtube = await _contentService.GetYouTubeSectionAsync();
+        return Ok(youtube);
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
+    [HttpPut("youtube")]
+    public async Task<IActionResult> UpdateYouTube([FromBody] YouTubeSectionDto dto)
+    {
+        await _contentService.UpdateYouTubeSectionAsync(dto);
+        return Ok();
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
+    [HttpPut("navbar")]
+    public async Task<IActionResult> UpdateNavbar([FromBody] NavbarDto dto)
+    {
+        await _contentService.UpdateNavbarAsync(dto);
+        return Ok();
+    }
+
+    [Authorize(Roles = "Admin,Editor")]
+    [HttpPut("footer")]
+    public async Task<IActionResult> UpdateFooter([FromBody] FooterDto dto)
+    {
+        await _contentService.UpdateFooterAsync(dto);
         return Ok();
     }
 

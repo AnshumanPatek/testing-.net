@@ -7,25 +7,20 @@ public class HomeContentDto
     public AboutSectionDto? About { get; set; }
 }
 
-public class NavbarDto
-{
-    public string? LogoUrl { get; set; }
-    public string CTAText { get; set; } = "Schedule a call";
-    public string? CTAUrl { get; set; }
-}
-
 public class HeroSectionDto
 {
     public string? Headline { get; set; }
     public string? Tagline { get; set; }
     public string? BackgroundType { get; set; }
     public string? BackgroundUrl { get; set; }
+    public bool IsDraft { get; set; }
 }
 
 public class YouTubeSectionDto
 {
     public string? VideoUrl { get; set; }
     public string? Title { get; set; }
+    public bool IsDraft { get; set; }
 }
 
 public class AboutSectionDto
@@ -33,6 +28,15 @@ public class AboutSectionDto
     public string? Title { get; set; }
     public string? Content { get; set; }
     public string? ImageUrl { get; set; }
+    public bool IsDraft { get; set; }
+}
+
+public class NavbarDto
+{
+    public string? LogoUrl { get; set; }
+    public string? LogoId { get; set; }
+    public string CTAText { get; set; } = "Schedule a call";
+    public string? CTAUrl { get; set; }
 }
 
 public class FooterDto

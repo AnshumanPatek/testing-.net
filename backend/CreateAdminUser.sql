@@ -7,7 +7,7 @@ INSERT INTO Users (Id, Email, PasswordHash, FirstName, LastName, Role, IsActive,
 VALUES (
     NEWID(),
     'admin@gainatelie.com',
-    '$2a$11$8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8uK1J1J1J1J1J1J1J1J1J1J1J1J1J1J1J', -- Change this!
+    '$2a$11$8QSbalqEVtNs7evk9SeT0ONp4TBSbizOZKqcMvcsveo.aWDXtNuAu', -- Password: admin123
     'Admin',
     'User',
     'Admin',
@@ -20,7 +20,7 @@ INSERT INTO Users (Id, Email, PasswordHash, FirstName, LastName, Role, IsActive,
 VALUES (
     NEWID(),
     'editor@gainatelie.com',
-    '$2a$11$8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8uK1J1J1J1J1J1J1J1J1J1J1J1J1J1J1J', -- Change this!
+    '$2a$11$8QSbalqEVtNs7evk9SeT0ONp4TBSbizOZKqcMvcsveo.aWDXtNuAu', -- Password: admin123
     'Editor',
     'User',
     'Editor',

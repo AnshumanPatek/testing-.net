@@ -1,3 +1,6 @@
+// 'use client'
+
+
 import { getHomeContent } from '@/lib/api';
 import Hero from '@/components/Hero';
 import YouTubeSection from '@/components/YouTubeSection';
